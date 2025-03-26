@@ -38,11 +38,11 @@
 
 - Cоздаем конфигурационный файл OpenVPN /etc/openvpn/server.conf со следующим содержимым:
 
-image1
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn1.jpg)
 
 - Создаем service unit для запуска OpenVPN /etc/systemd/system/openvpn@.service со следующим содержимым:
 
-image2
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn2.jpg)
 
 - Запускаем сервис:
 
@@ -54,7 +54,7 @@ image2
 
 - Cоздаем конфигурационный файл OpenVPN /etc/openvpn/server.conf со следующим содержимым:
 
-image3
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn3.jpg)
 
 - Копируем в директорию /etc/openvpn файл-ключ static.key, который был создан на host1:
 
@@ -62,7 +62,7 @@ image3
 
 - Создаем service unit для запуска OpenVPN /etc/systemd/system/openvpn@.service со следующим содержимым:
 
-image4
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn4.jpg)
 
 - Запускаем сервис:
 
@@ -78,31 +78,31 @@ image4
 
 `iperf3 -c 10.10.10.1 -t 40 -i 5`
 
-image5
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn5.jpg)
 
 - И в обратную сторону:
 
 `iperf3 -c 10.10.10.1 -t 40 -i 5 -R`
 
-image6
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn6.jpg)
 
 - Меняем в конфигурационных файлах режим работы с tap на tun. Замеряем скорость соединения:
 
 `iperf3 -c 10.10.10.1 -t 40 -i 5`
 
-image7
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn7.jpg)
 
 - И в обратную сторону:
 
 `iperf3 -c 10.10.10.1 -t 40 -i 5 -R`
 
-image8
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn8.jpg)
 
 Выводы: Видим что разницы в пропускной способности между tun и tap режимом нет - ~ 400 Mbit/s. Основное отличие между tun и tap, это то что tap работает на L2, а tun на L3. tap может быть полезен, например, когда в туннельной сети есть тонкие клиенты или устройства с загрузкой по сети. Без VPN туннеля пропускная способность гораздо выше:
 
 `iperf3 -c 192.168.56.10 -t 40 -i 5`
 
-image9
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn9.jpg)
 
 2. RAS на базе OpenVPN
 
@@ -154,8 +154,7 @@ image9
 
 - Создаем конфигурационный файл сервера /etc/openvpn/server.conf:
 
-image10
-
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn10.jpg)
 - Зададим параметр iroute для клиента:
 
 `echo 'iroute 10.10.10.0 255.255.255.0' > /etc/openvpn/client/client`
@@ -170,7 +169,7 @@ image10
 
 - Создаем файл /etc/openvpn/client.conf со следующим содержимым:
 
-image11
+![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn11.jpg)
 
 - Копируем в одну директорию с client.conf файлы с сервера:
 
@@ -188,8 +187,8 @@ image11
 
 - При успешном подключении проверяем пинг по внутреннему IP адресу сервера в туннеле:
 
-image12
+`ping -c 4 10.10.10.1`
 
 - Также проверяем командой ip r (netstat -rn) на хостовой машине что сеть туннеля импортирована в таблицу маршрутизации:
 
-image13
+`ip r`
