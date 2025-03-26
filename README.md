@@ -187,12 +187,8 @@
 
 - При успешном подключении проверяем пинг по внутреннему IP адресу сервера в туннеле:
 
-`ping -c 4 10.10.10.1`
-
 ![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn12.jpg)
 
 - Также проверяем командой ip r (netstat -rn) на хостовой машине что сеть туннеля импортирована в таблицу маршрутизации:
-
-`ip r`
 
 ![Image alt](https://github.com/NikPuskov/VPN/blob/main/img/vpn13.jpg)
